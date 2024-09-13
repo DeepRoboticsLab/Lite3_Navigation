@@ -1,0 +1,9 @@
+
+width: 10
+height: 10
+
+plugins:
+  - {name: stvl_obstacle_layer, type: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"}
+  - {name: sob_layer,  type: "sob_layer::SobLayer"}
+  # - {name: voxel_layer, type: "costmap_2d::VoxelLayer"}  
+  # - {name: inflation_layer, type: "costmap_2d::InflationLayer"}  

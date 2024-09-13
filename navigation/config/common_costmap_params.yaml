@@ -1,0 +1,149 @@
+
+# from source code
+global_frame: map
+robot_base_frame: base_link
+rolling_window: true
+track_unknown_space: false
+always_send_full_costmap: false
+
+# from cfg file
+transform_tolerance: 1.0
+update_frequency: 10
+publish_frequency: 5
+resolution: 0.1
+origin_x: 0
+origin_y: 0
+footprint: [[-0.3, -0.2], [-0.3, 0.2], [0.3, 0.2], [0.3, -0.2]]
+footprint_padding: 0.1
+
+static_layer:
+  map_topic: map
+  first_map_only: true
+  subscribe_to_updates: false
+  track_unknown_space: false
+  use_maximum: true
+  lethal_cost_threshold:  100
+  unknown_cost_value: -1
+  trinary_costmap: true
+
+stvl_obstacle_layer:
+  observation_sources:   rslidar_points
+  transform_tolerance:   1.0    # seconds  
+  enabled:               true
+  publish_voxel_map:     true   # default off  
+  voxel_size:            0.05   #meters
+  combination_method:    1      #1=max, 0=override
+  mark_threshold:        0      #voxel height
+  update_footprint_enabled: true
+  track_unknown_space:   false   #default space is unknown
+  decay_model:           0      #0=linear, 1=exponential, -1=persistent
+  voxel_decay:           0.3     #seconds if linear, e^n if exponential
+  mapping_mode:          false  # default off, saves map not for navigation
+  map_save_duration:     60     #default 60s, how often to autosave
+
+  rslidar_points:
+    topic: /rslidar_points
+    sensor_frame: rslidar
+    observation_persistence: 0.0  #default 0, use all measurements taken during now-value, 0=latest 
+    expected_update_rate: 10.0     #default 0, if not updating at this rate at least, remove from buffer
+    data_type: PointCloud2
+    min_obstacle_height: 0.15      #default 0, meters
+    max_obstacle_height: 2.0      #defaule 3, meters
+    inf_is_valid: false           #default false, for laser scans    
+    marking: true
+    clearing: true
+    min_z: 0.2
+    max_z: 3.0
+    vertical_fov_angle: 0.56
+    vertical_fov_padding: 0.0
+    horizontal_fov_angle: 6.29
+    decay_acceleration: 5
+    filter: voxel               #default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommended to have at one filter on
+    voxel_min_points: 3           #default 0, minimum points per voxel for voxel filter
+    clear_after_reading: false    #default false, clear the buffer after the layer gets readings from it
+    enabled: true
+    model_type: 1
+    obstacle_range: 3.0           #meters
+
+sob_layer:
+  enabled: true
+  inflate_unknown: false
+  inscribed_radius: 0.15
+  inflation_radius: 0.45
+  cost_scaling_factor: 10
+
+
+###################################
+#
+# for voxel lay and inflation layer
+#
+###################################
+#
+# obstacle_layer:
+#   #from source code
+#   track_unknown_space: false
+#   transform_tolerance: 1.0
+#   observation_sources: rslidar_points
+#   rslidar_points: {
+#     topic: rslidar_points,
+#     sensor_frame: rslidar,
+#     observation_persistence: 0.0, 
+#     expected_update_rate: 8,
+#     data_type: PointCloud2, 
+#     min_obstacle_height: 0.0,
+#     max_obstacle_height: 2.0,     
+#     inf_is_valid: false,    
+#     clearing: true, 
+#     marking: true, 
+#     obstacle_range: 2.5,
+#     raytrace_range: 3.0
+#   }
+
+#   #from cfg file
+#   enabled: true
+#   footprint_clearing_enabled: true
+#   max_obstacle_height: 2.0
+#   combination_method: 1
+
+# voxel_layer:
+#   # from source code
+#   publish_voxel_map: false
+
+#   # from obstacle_layer source code
+#   track_unknown_space: false
+#   transform_tolerance: 1.0
+#   observation_sources: rslidar_points
+#   rslidar_points: {
+#     topic: rslidar_points,
+#     sensor_frame: rslidar,
+#     observation_persistence: 0.0, 
+#     expected_update_rate: 8,
+#     data_type: PointCloud2, 
+#     min_obstacle_height: 0.0,
+#     max_obstacle_height: 2.0,     
+#     inf_is_valid: false,
+#     clearing: true, 
+#     marking: true, 
+#     obstacle_range: 2.5,
+#     raytrace_range: 3.0
+#   }
+
+#   # from cfg file
+#   origin_z: 0.0
+#   z_resolution: 0.10
+#   z_voxels: 20
+#   unknown_threshold: 19
+#   mark_threshold: 2
+
+#   # from obstacle_layer cfg file
+#   enabled: true
+#   footprint_clearing_enabled: true
+#   max_obstacle_height: 2.0
+#   combination_method: 1
+
+# inflation_layer:
+#   # from cfg file
+#   enabled: true
+#   cost_scaling_factor: 10
+#   inflation_radius: 0.8
+#   inflate_unknown: false

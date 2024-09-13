@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+    <name>navigation</name>
+    <version>0.1.0</version>
+    <description>A move_base based navigation package</description>
+    <license>TODO</license>
+    <maintainer email="zhangjixiang@deeprobotics.cn">Zhang Jixiang</maintainer>
+    <author email="zhangjixiang@deeprobotics.cn">Zhang Jixiang</author>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <run_depend>move_base</run_depend>
+    <run_depend>nav_core</run_depend>
+    <run_depend>global_planner</run_depend>
+    <run_depend>move_base_msgs</run_depend>
+    <run_depend>rotate_recovery</run_depend>
+    <run_depend>costmap_2d</run_depend>
+    <run_depend>map_server</run_depend>
+    <run_depend>costmap_converter</run_depend>
+    <run_depend>teb_local_planner</run_depend>
+    <!-- <run_depend>velodyne_pointcloud</run_depend> -->
+    <!-- <run_depend>ndt_localization</run_depend> -->
+    <!-- <run_depend>pointcloud_to_laserscan</run_depend> -->
+</package>

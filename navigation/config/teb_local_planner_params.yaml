@@ -1,0 +1,147 @@
+TebLocalPlannerROS:
+  controller_frequency: 10
+  footprint_model:
+    type: polygon
+    vertices: [[-0.30, -0.20], [-0.30, 0.20], [0.30, 0.20], [0.30, -0.20]]
+
+  odom_topic: leg_odom
+  map_frame: /map
+
+  # Trajectory
+  teb_autosize: true
+  dt_ref: 0.5
+  dt_hysteresis: 0.1
+  min_samples: 3
+  max_samples: 100
+  global_plan_overwrite_orientation: false
+  allow_init_with_backwards_motion: false
+  global_plan_viapoint_sep: 0.3
+  via_points_ordered: true
+  max_global_plan_lookahead_dist: 5.0
+  global_plan_prune_distance: 0.5
+  exact_arc_length: false
+  force_reinit_new_goal_dist: 1.0
+  force_reinit_new_goal_angular: 0.78
+  feasibility_check_no_poses: 30
+  feasibility_check_lookahead_distance: 3
+  publish_feedback: false
+  min_resolution_collision_check_angular: 3.1415926
+  control_look_ahead_poses: 1
+  prevent_look_ahead_poses_near_goal: 0
+
+  # Robot
+  max_vel_x: 1.0
+  max_vel_x_backwards: 0.2
+  max_vel_y: 0.1
+  max_vel_trans: 1.0
+  max_vel_theta: 1.0
+  acc_lim_x: 1.0
+  acc_lim_y: 0.1
+  acc_lim_theta: 1.0
+  min_turning_radius: 0.0
+  wheelbase: 0.0  # only for cmd_angle_instead_rotvel enabled car-like robot  
+  cmd_angle_instead_rotvel: false
+  is_footprint_dynamic: false
+  use_proportional_saturation: true
+  transform_tolerance: 0.3
+
+  # GoalTolerance
+  xy_goal_tolerance: 0.20
+  yaw_goal_tolerance: 0.20
+  free_goal_vel: false
+  trans_stopped_vel: 0.05
+  theta_stopped_vel: 0.05
+  complete_global_plan: false
+
+  # Obstacles
+  min_obstacle_dist: 0.15
+  inflation_dist: 0.45
+  dynamic_obstacle_inflation_dist: 0.6
+  include_dynamic_obstacles: true
+  include_costmap_obstacles: false
+  costmap_obstacles_behind_robot_dist: 2.0
+  obstacle_poses_affected: 10
+  legacy_obstacle_association: false
+  obstacle_association_force_inclusion_factor: 3 
+  obstacle_association_cutoff_factor: 10
+  costmap_converter_plugin: "costmap_converter::CostmapToPolygonsDBSMCCH"
+  costmap_converter: 
+    CostmapToPolygonsDBSMCCH: 
+      cluster_max_distance: 0.3
+      cluster_max_pts: 30
+      cluster_min_pts: 3
+      convex_hull_min_pt_separation: 0.1
+  costmap_converter_spin_thread: true
+  obstacle_proximity_ratio_max_vel: 0.7
+  obstacle_proximity_lower_bound: 0.2
+  obstacle_proximity_upper_bound: 0.6
+
+  # Optimization
+  # all default
+  # no_inner_iterations: 5
+  # no_outer_iterations: 4
+  optimization_activate: true
+  # optimization_verbose: false
+  penalty_epsilon: 0.15      #default 0.05
+  # weight_max_vel_x: 2
+  # weight_max_vel_y: 2
+  # weight_max_vel_theta: 1
+  # weight_acc_lim_x: 1
+  # weight_acc_lim_y: 1
+  # weight_acc_lim_theta: 1
+  weight_kinematics_nh: 10   #default 1000
+  weight_kinematics_forward_drive: 50 #default 1
+  weight_kinematics_turning_radius: 0 #default 1
+  weight_optimaltime: 1
+  weight_shortest_path: 9  #default 0
+  # weight_obstacle: 50
+  # weight_inflation: 0.1
+  # weight_dynamic_obstacle: 50
+  # weight_dynamic_obstacle_inflation: 0.1
+  # weight_velocity_obstacle_ratio: 0
+  weight_viapoint: 1        #default 1
+  weight_prefer_rotdir: 0   #default 50
+  # weight_adapt_factor: 2
+  # obstacle_cost_exponent: 1
+
+  weight_linear_angular: 3
+  weight_linear_angular_times: 1
+
+  # Homotopy Class Planner
+  enable_homotopy_class_planning: false
+  # enable_multithreading: 
+  # simple_exploration:
+  # max_number_classes:
+  # max_number_plans_in_current_class:
+  # selection_obst_cost_scale:
+  # selection_prefer_initial_plan:
+  # selection_viapoint_cost_scale:
+  # selection_cost_hysteresis:
+  # selection_alternative_time_cost:
+  # selection_dropping_probability:
+  # switching_blocking_period:
+  # roadmap_graph_samples:
+  # roadmap_graph_area_width:
+  # roadmap_graph_area_length_scale:
+  # h_signature_prescaler:
+  # h_signature_threshold:
+  # obstacle_keypoint_offset:
+  # obstacle_heading_threshold:
+  # viapoints_all_candidates:
+  # visualize_hc_graph:
+  # visualize_with_time_as_z_axis_scale:
+  # delete_detours_backwards:
+  # detours_orientation_tolerance:
+  # length_start_orientation_vector:
+  # max_ratio_detours_duration_best_duration:
+
+  # Recovery
+  shrink_horizon_backup: false
+  # shrink_horizon_min_duration: 
+  oscillation_recovery: false
+  # oscillation_v_eps: 
+  # oscillation_omega_eps: 
+  # oscillation_recovery_min_duration: 
+  # oscillation_filter_duration: 
+  divergence_detection: false
+  # divergence_detection_max_chi_squared: 
